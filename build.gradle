@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+}
+
+group = 'ca.fun'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+
+    // JAXB API and Implementation
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1'
+    runtimeOnly 'org.glassfish.jaxb:jaxb-runtime:3.0.2'
+
+    // Annotation processor to generate JAXB classes from XSD
+    annotationProcessor 'org.glassfish.jaxb:jaxb-xjc:3.0.2'
+
+    // Immutables library
+    implementation 'org.immutables:value:2.8.8' // Use the latest version
+
+    // Annotation processor
+    annotationProcessor 'org.immutables:value:2.8.8' // Use the same version as the library
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+// Optional: If you want to use the generated sources within your IDE
+sourceSets {
+    main {
+        java {
+            srcDirs += ['build/generated/sources/annotationProcessor/java/main']
+        }
+    }
+}
